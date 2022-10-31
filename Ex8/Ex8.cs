@@ -23,16 +23,17 @@ class Ex8
                         }
                         catch (Exception e)
                         {
-                            Console.WriteLine(e.Message);
+                            Console.WriteLine("create pet Exception: " + e.Message);
                         }
                     else if (action[1].ToLower() == "clinic") // якщо створення клініки
                         try
                         {
                             clinics.Add(new Clinic(action[2], Convert.ToInt32(action[3]))); // створення клініки
+                            Console.WriteLine(clinics.Count);
                         }
                         catch (Exception e)
                         {
-                            Console.WriteLine(e.Message);
+                            Console.WriteLine("create clinic Exception: " + e.Message);
                         }
 
                 if (action[0].ToLower() == "add") // якщо команда додавання
@@ -43,7 +44,7 @@ class Ex8
                     }
                     catch (Exception e)
                     {
-                        Console.WriteLine(e.Message);
+                        Console.WriteLine("add Exception: " + e.Message);
                     }
                 }
 
@@ -55,7 +56,7 @@ class Ex8
                     }
                     catch (Exception e)
                     {
-                        Console.WriteLine(e.Message);
+                        Console.WriteLine("release Exception: " + e.Message);
                     }
                 }
 
@@ -68,22 +69,22 @@ class Ex8
                     }
                     catch (Exception e)
                     {
-                        Console.WriteLine(e.Message);
+                        Console.WriteLine("HasEmptyRooms Exception: " + e.Message);
                     }
                 }
 
-                if (action[0].ToLower() == "print") // якщо команда перевірки клініки на пусті кімнати
+                if (action[0].ToLower() == "print") // якщо команда друку
                 {
                     try
                     {
-                        if (action.Length == 3)
-                            Print(action[1], clinics, Convert.ToInt32(action[2]));
-                        else if (action.Length == 2)
-                            Print(action[1], clinics);
+                        if (action.Length == 3) //  якщо вказано вивести певну кімнату
+                            Print(action[1], clinics, Convert.ToInt32(action[2])); // виводить певну кімнату
+                        else if (action.Length == 2) //  якщо не вказано вивести певну кімнату
+                            Print(action[1], clinics); // виводить всі кімнати
                     }
                     catch (Exception e)
                     {
-                        Console.WriteLine(e.Message);
+                        Console.WriteLine("print Exception: " + e.Message);
                     }
                 }
             }
@@ -123,7 +124,7 @@ class Ex8
     {
         for (int i = 0; i < clinics.Count; i++) // перевірка чи така клініка створена і видалення тварини в неї
             if (clinics[i].Name.ToLower() == clinicName.ToLower()) // якщо клініка створена
-                if (clinics[i].Releas()) // видалення тварини з клініки і перевірка на успішність видалення
+                if (clinics[i].Release()) // видалення тварини з клініки і перевірка на успішність видалення
                     return true; // видалення вдалось
                 else // якщо видалення не вдалось
                     return false; // то перевірка закінчується
@@ -145,7 +146,7 @@ class Ex8
         return false; // вільних кімнат немає
     }
 
-    static void Print(string clinicName, List<Clinic> clinics, int? index = null)
+    static void Print(string clinicName, List<Clinic> clinics, int? index = null) // друк кімнат
     {
         for (int i = 0; i < clinics.Count; i++) // перевірка чи така клініка створена і чи є вільні кімнати в ній
             if (clinics[i].Name.ToLower() == clinicName.ToLower()) // якщо клініка створена

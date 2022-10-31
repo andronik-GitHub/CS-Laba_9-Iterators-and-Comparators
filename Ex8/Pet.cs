@@ -18,5 +18,5 @@ class Pet
         Kind = kind;
     }
 
-    public override string ToString() => Name + " " + Age + " " + Kind;
+    public override string ToString() => Name + " " + Age + " " + Kind; // "{petName} {petAge} {petKind}"
 }
